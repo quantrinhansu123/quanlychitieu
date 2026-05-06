@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#161d17",
+                    "secondary-fixed": "#cce5ff",
+                    "outline-variant": "#bbcbbb",
+                    "primary-fixed-dim": "#4ae183",
+                    "surface-tint": "#006d37",
+                    "on-surface-variant": "#3d4a3e",
+                    "outline": "#6c7b6d",
+                    "surface-container-high": "#e2ebe0",
+                    "primary": "#006d37",
+                    "on-primary-fixed-variant": "#005228",
+                    "on-secondary-container": "#00476e",
+                    "on-tertiary-container": "#772e14",
+                    "surface": "#f3fcf1",
+                    "on-primary-container": "#005027",
+                    "surface-dim": "#d4dcd2",
+                    "tertiary": "#98472a",
+                    "on-secondary-fixed": "#001d31",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-primary": "#4ae183",
+                    "tertiary-container": "#ff9875",
+                    "on-secondary": "#ffffff",
+                    "background": "#f3fcf1",
+                    "on-primary-fixed": "#00210c",
+                    "on-surface": "#161d17",
+                    "on-error-container": "#93000a",
+                    "surface-bright": "#f3fcf1",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed-variant": "#793015",
+                    "surface-container-highest": "#dce5da",
+                    "tertiary-fixed-dim": "#ffb59d",
+                    "tertiary-fixed": "#ffdbd0",
+                    "primary-container": "#2ecc71",
+                    "secondary-container": "#5cb8fd",
+                    "surface-container-low": "#eef6eb",
+                    "surface-container": "#e8f0e5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "12px",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "container-padding": "20px",
+                    "xl": "32px",
+                    "xxl": "48px",
+                    "sm": "8px",
+                    "xs": "4px",
+                    "lg": "24px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "body-sm": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "h2": ["Manrope"],
+                    "display": ["Manrope"],
+                    "h1": ["Manrope"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "14px", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "h2": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "display": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "h1": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #f3fcf1; color: #161d17; font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .active-icon { font-variation-settings: 'FILL' 1; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="bg-surface/80 backdrop-blur-md fixed top-0 left-0 w-full z-50 flex justify-between items-center px-container-padding py-md">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container">
+<img alt="User avatar" data-alt="A professional headshot of a smiling young person with warm lighting against a soft, blurred studio background. The style is modern and clean, fitting a premium financial application with a bright, encouraging atmosphere. High-quality digital photography with a natural skin tone and subtle green highlights to match the brand palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNpAzkei0yTMu19wpFRLrDufCfCgYJGv67kJxSw89-f4GPLrXub7pT2oGMD0MQRQwyGLnu5bhUXsw4YyL5II9iVD2W6P9VegV-vZGKp5JFLddPFntbvCFvsXZ802c65RN4dc770OqzJUiGGyJa1QgHPgMsJgA-hVDgm1kCh4nzmOrqli4CxErnou3lo41EluvvKm1wM-LzwZal0yqOpRZwMkt0XmtgzV8mxzNNoKse-FsfdfZOROvTOzuE5N_MlsnrzAs3hT3CH28"/>
+</div>
+<h1 class="font-h1 text-h1 font-bold text-primary">Tài chính Cá nhân</h1>
+</div>
+<button class="transition-all duration-200 active:scale-95 hover:opacity-80">
+<span class="material-symbols-outlined text-primary text-[28px]">notifications</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-24 px-container-padding">
+<!-- Summary Card (Bento Style) -->
+<section class="mb-lg">
+<div class="bg-surface-container-lowest rounded-xl p-lg shadow-[0_8px_30px_rgb(22,29,23,0.04)] border border-outline-variant/20">
+<div class="flex justify-between items-start mb-md">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-xs">Tổng ngân sách tháng này</p>
+<p class="font-display text-display font-bold text-primary">15.000.000đ</p>
+</div>
+<div class="bg-primary-container/10 p-sm rounded-lg">
+<span class="material-symbols-outlined text-primary">account_balance_wallet</span>
+</div>
+</div>
+<div class="space-y-sm">
+<div class="flex justify-between font-label-md text-label-md">
+<span class="text-on-surface-variant">Đã chi tiêu (62%)</span>
+<span class="text-on-surface font-bold">9.300.000đ</span>
+</div>
+<div class="h-3 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary transition-all duration-500" style="width: 62%;"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Category Budget List -->
+<section class="space-y-md">
+<div class="flex justify-between items-center mb-sm">
+<h2 class="font-h2 text-h2 text-on-surface">Danh mục ngân sách</h2>
+<button class="text-primary font-label-md hover:underline transition-all">Chỉnh sửa</button>
+</div>
+<!-- Budget Item 1 -->
+<div class="bg-white rounded-xl p-md shadow-[0_4px_20px_rgba(22,29,23,0.03)] flex flex-col gap-md border border-transparent hover:border-primary-container/30 transition-all">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-xl bg-tertiary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary">restaurant</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Ăn uống &amp; Cà phê</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Đã dùng 800k / 1 triệu</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-label-md text-label-md text-error">Cận hạn mức</p>
+</div>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary-container" style="width: 80%;"></div>
+</div>
+</div>
+<!-- Budget Item 2 -->
+<div class="bg-white rounded-xl p-md shadow-[0_4px_20px_rgba(22,29,23,0.03)] flex flex-col gap-md border border-transparent hover:border-primary-container/30 transition-all">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-xl bg-secondary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">directions_car</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Di chuyển</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Đã dùng 450k / 2 triệu</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-label-md text-label-md text-primary">An toàn</p>
+</div>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary-container" style="width: 22.5%;"></div>
+</div>
+</div>
+<!-- Budget Item 3 -->
+<div class="bg-white rounded-xl p-md shadow-[0_4px_20px_rgba(22,29,23,0.03)] flex flex-col gap-md border border-transparent hover:border-primary-container/30 transition-all">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-xl bg-primary-fixed-dim/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">shopping_bag</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Mua sắm</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Đã dùng 3.200k / 5 triệu</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-label-md text-label-md text-on-surface-variant">64%</p>
+</div>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary-container" style="width: 64%;"></div>
+</div>
+</div>
+<!-- Add Button -->
+<button class="w-full h-14 bg-primary text-white rounded-xl font-label-md flex items-center justify-center gap-sm transition-all duration-200 active:scale-95 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined">add_circle</span>
+                Thêm ngân sách mới
+            </button>
+</section>
+<!-- Visualization Banner -->
+<section class="mt-xl">
+<div class="relative overflow-hidden rounded-xl bg-primary-container p-lg h-40 flex items-center">
+<div class="z-10 w-2/3">
+<h3 class="font-h2 text-h2 text-on-primary-container leading-tight mb-xs">Tiết kiệm thông minh hơn</h3>
+<p class="font-body-sm text-body-sm text-on-primary-container/80">Hệ thống gợi ý cắt giảm 10% chi tiêu ăn uống dựa trên thói quen của bạn.</p>
+</div>
+<div class="absolute right-[-20px] top-[-10px] w-48 h-48 opacity-20">
+<img alt="Growth metaphor" class="object-contain" data-alt="A macro artistic shot of a small green plant sprout emerging from a mound of soil, symbolizing financial growth and prosperity. The lighting is ethereal and soft, focusing on the vibrant green leaves against a clean, minimalist white background that mirrors the app's serene and clear visual identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOUYy0GrS73qV_6IrCpQPBL4GufWzoxr6Ur6ShEryhdxWyJK13n0M1yj0D56bDYSwBGYR6ApBQSosHQ0_-6ENSvizJJRHgV9H9zdQLO-GwBq2yk8ZtGwmK2VGelSC2AyS4-dFgrmACHYghozZled_DRjNYuxXBSAqx38FUR3iozEizV5GXI2Dbui1WE_lhtjN_epaOHdL1zq2aYcgrIGKiolIy_pRr99foP1LMj6zgLN7PFswFFAM4HBSXUFkm2sdnBDX-4JDmbAw"/>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 pb-sm pt-xs bg-surface dark:bg-surface-container backdrop-blur-lg shadow-[0_-4px_20px_rgba(22,29,23,0.05)] rounded-t-xl">
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 transition-transform duration-200 active:scale-90 hover:text-primary">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-sm text-label-sm">Tổng quan</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 transition-transform duration-200 active:scale-90 hover:text-primary">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-sm text-label-sm">Giao dịch</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 transition-transform duration-200 active:scale-90 hover:text-primary">
+<span class="material-symbols-outlined text-[32px] text-primary">add_circle</span>
+<span class="font-label-sm text-label-sm">Thêm</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 transition-transform duration-200 active:scale-90 hover:text-primary">
+<span class="material-symbols-outlined">pie_chart</span>
+<span class="font-label-sm text-label-sm">Báo cáo</span>
+</div>
+<!-- Active Tab: Ngân sách -->
+<div class="flex flex-col items-center justify-center bg-primary-container dark:bg-on-primary-fixed-variant text-on-primary-container dark:text-primary-fixed rounded-full px-4 py-1 transition-transform duration-200 active:scale-90">
+<span class="material-symbols-outlined active-icon" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+<span class="font-label-sm text-label-sm">Ngân sách</span>
+</div>
+</nav>
+</body></html>
