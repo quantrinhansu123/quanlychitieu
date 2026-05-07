@@ -19,13 +19,6 @@ const categorySeed = [
   { name: "Thưởng", icon: "TH", kind: "income" }
 ];
 
-const reports = [
-  ["Ăn uống", "4.250k", 82],
-  ["Mua sắm", "3.800k", 68],
-  ["Di chuyển", "1.150k", 35],
-  ["Giải trí", "950k", 28]
-];
-
 const budgets = [
   ["Ăn uống", "4.250k / 5.000k", 85],
   ["Mua sắm", "3.800k / 6.000k", 63],
@@ -610,7 +603,6 @@ export default function FinanceApp({ initialScreen = "overview" }) {
 
   const screen = routeScreens[pathname] || employeeRouteScreens[pathname] || initialScreen;
   const currentTitle = titles[screen];
-  const reportItems = useMemo(() => reports, []);
 
   const budgetProgressItems = useMemo(() => {
     return budgetRows.map((row) => {
@@ -688,6 +680,8 @@ export default function FinanceApp({ initialScreen = "overview" }) {
       expense: build("expense")
     };
   }, [transactions, categories, reportFrom, reportTo]);
+
+  const reportsEmpty = reportByKind.income.totalVnd === 0 && reportByKind.expense.totalVnd === 0;
 
   useEffect(() => {
     let isMounted = true;
@@ -1061,6 +1055,11 @@ export default function FinanceApp({ initialScreen = "overview" }) {
                 </div>
               </div>
             </section>
+            {reportsEmpty ? (
+              <section className="card chart-card">
+                <p className="muted">Chưa có dữ liệu giao dịch trong khoảng ngày đã chọn.</p>
+              </section>
+            ) : null}
             <div className="report-2col">
               <section className="stack">
                 <div className="row">
@@ -1068,9 +1067,7 @@ export default function FinanceApp({ initialScreen = "overview" }) {
                   <strong className="income">{formatK(Math.round(reportByKind.income.totalVnd / 1000))}</strong>
                 </div>
                 <div className="list">
-                  {reportByKind.income.progressItems.length
-                    ? reportByKind.income.progressItems.map((item) => <ProgressItem item={item} key={`income-${item[0]}`} />)
-                    : reportItems.map((item) => <ProgressItem item={item} key={`income-fallback-${item[0]}`} />)}
+                  {reportByKind.income.progressItems.map((item) => <ProgressItem item={item} key={`income-${item[0]}`} />)}
                 </div>
               </section>
 
@@ -1080,9 +1077,7 @@ export default function FinanceApp({ initialScreen = "overview" }) {
                   <strong className="expense">{formatK(Math.round(reportByKind.expense.totalVnd / 1000))}</strong>
                 </div>
                 <div className="list">
-                  {reportByKind.expense.progressItems.length
-                    ? reportByKind.expense.progressItems.map((item) => <ProgressItem item={item} key={`expense-${item[0]}`} />)
-                    : reportItems.map((item) => <ProgressItem item={item} key={`expense-fallback-${item[0]}`} />)}
+                  {reportByKind.expense.progressItems.map((item) => <ProgressItem item={item} key={`expense-${item[0]}`} />)}
                 </div>
               </section>
             </div>

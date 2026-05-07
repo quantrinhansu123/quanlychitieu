@@ -478,7 +478,7 @@ h3 {
 
 .category-form {
   display: grid;
-  grid-template-columns: 1fr 160px 160px;
+  grid-template-columns: 1.6fr 110px 140px;
   gap: 12px;
   align-items: end;
 }
@@ -495,7 +495,7 @@ h3 {
 .category-head,
 .category-row {
   display: grid;
-  grid-template-columns: 68px 2fr 110px 72px;
+  grid-template-columns: 54px 3fr 110px 72px;
   gap: 10px;
   align-items: center;
 }
@@ -614,7 +614,7 @@ h3 {
 
   .category-head,
   .category-row {
-    grid-template-columns: 62px 2fr 96px 56px;
+    grid-template-columns: 52px 3fr 96px 56px;
   }
 
   .category-grid {
