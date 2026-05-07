@@ -51,7 +51,7 @@ const titles = {
   budget: "Thiết lập ngân sách"
 };
 
-function TransactionItem({ item }) {
+function TransactionItem({ item, onDelete }) {
   return (
     <article className="item">
       <div className="item-main">
@@ -61,6 +61,11 @@ function TransactionItem({ item }) {
           <p className="tiny muted">{item.meta}</p>
         </div>
       </div>
+      {onDelete ? (
+        <button className="danger danger-compact" type="button" onClick={onDelete} aria-label="Xóa giao dịch">
+          Xóa
+        </button>
+      ) : null}
       <p className={`amount ${item.kind === "income" ? "income" : "expense"}`}>{item.amount}</p>
     </article>
   );
@@ -383,6 +388,8 @@ function AddScreen({ onSave, categories, onAddCategory }) {
   const [newCategoryIcon, setNewCategoryIcon] = useState("");
   const [newCategoryKind, setNewCategoryKind] = useState("expense");
   const [showAddCategory, setShowAddCategory] = useState(false);
+  const [saveError, setSaveError] = useState("");
+  const [saving, setSaving] = useState(false);
 
   const visibleCategories = useMemo(() => {
     return categories.filter((c) => c.kind === "both" || c.kind === kind);
@@ -412,7 +419,7 @@ function AddScreen({ onSave, categories, onAddCategory }) {
     return `${dd}/${mm}/${yyyy}`;
   }
 
-  function handleSave() {
+  async function handleSave() {
     const digits = String(amount || "").replace(/\D/g, "");
     if (!digits) return;
 
@@ -426,7 +433,9 @@ function AddScreen({ onSave, categories, onAddCategory }) {
     const min = String(now.getMinutes()).padStart(2, "0");
     const occurredAtIso = `${occurredDate}T${hh}:${min}:00`;
 
-    onSave({
+    setSaving(true);
+    setSaveError("");
+    const result = await onSave({
       title: note.trim() || selectedCategory.name,
       meta: `${formatDateVi(occurredDate)} - ${hh}:${min}`,
       amount: `${kind === "income" ? "+" : "-"}${formatMoneyDots(digits)}đ`,
@@ -436,8 +445,14 @@ function AddScreen({ onSave, categories, onAddCategory }) {
       categoryId: selectedCategory.id ?? null,
       amountVnd: Number(digits)
     });
-    setAmount("");
-    setNote("");
+    setSaving(false);
+
+    if (result?.ok) {
+      setAmount("");
+      setNote("");
+      return;
+    }
+    setSaveError(result?.message || "Lưu giao dịch thất bại.");
   }
 
   function handleAddCategory() {
@@ -473,6 +488,12 @@ function AddScreen({ onSave, categories, onAddCategory }) {
           onChange={(event) => setAmount(event.target.value.replace(/\D/g, ""))}
         />
       </div>
+
+      {saveError ? (
+        <div className="card add-category-card" role="alert" style={{ borderColor: "rgba(179, 38, 30, 0.35)" }}>
+          <p className="tiny expense">{saveError}</p>
+        </div>
+      ) : null}
 
       <div className="field">
         <label htmlFor="occurredDate">NGÀY</label>
@@ -865,8 +886,8 @@ export default function FinanceApp({ initialScreen = "overview" }) {
     setBudgetRows((current) => current.map((r, i) => (i === index ? { ...r, budgetId: data.id } : r)));
   }
 
-  function saveTransaction(transaction) {
-    (async () => {
+  async function saveTransaction(transaction) {
+    try {
       const payload = {
         user_id: null,
         category_id: transaction.categoryId ?? null,
@@ -882,7 +903,9 @@ export default function FinanceApp({ initialScreen = "overview" }) {
         .select("id,kind,amount_vnd,note,occurred_at,category_id,categories(name,icon)")
         .single();
 
-      if (error || !data) return;
+      if (error || !data) {
+        return { ok: false, message: error?.message || "Không ghi được vào bảng transactions." };
+      }
 
       const category = data.categories || null;
       const title = data.note?.trim() ? data.note.trim() : category?.name || "Giao dịch";
@@ -902,7 +925,10 @@ export default function FinanceApp({ initialScreen = "overview" }) {
 
       setTransactions((current) => [mapped, ...current]);
       goToScreen("history");
-    })();
+      return { ok: true };
+    } catch (e) {
+      return { ok: false, message: e instanceof Error ? e.message : "Lỗi không xác định khi lưu giao dịch." };
+    }
   }
 
   async function addCategory(next) {
@@ -965,6 +991,13 @@ export default function FinanceApp({ initialScreen = "overview" }) {
     });
   }
 
+  async function deleteTransaction(transaction) {
+    if (!transaction?.id) return;
+    const { error } = await supabase.from("transactions").delete().eq("id", transaction.id);
+    if (error) return;
+    setTransactions((current) => current.filter((t) => t.id !== transaction.id));
+  }
+
   function goToScreen(nextScreen) {
     const routeMap = pathname === "/employees" || pathname.startsWith("/employees/") ? employeeScreenRoutes : screenRoutes;
     router.push(routeMap[nextScreen] || "/");
@@ -993,7 +1026,7 @@ export default function FinanceApp({ initialScreen = "overview" }) {
             </div>
             <div className="list">
               {transactions.map((item) => (
-                <TransactionItem item={item} key={`${item.title}-${item.meta}-${item.amount}`} />
+                <TransactionItem item={item} key={item.id ?? `${item.title}-${item.meta}-${item.amount}`} onDelete={() => deleteTransaction(item)} />
               ))}
             </div>
           </section>

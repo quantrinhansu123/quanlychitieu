@@ -470,6 +470,12 @@ h3 {
   font-weight: 800;
 }
 
+.danger-compact {
+  height: 36px;
+  padding-inline: 10px;
+  font-size: 12px;
+}
+
 .category-form {
   display: grid;
   grid-template-columns: 1fr 160px 160px;
